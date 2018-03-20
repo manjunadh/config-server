@@ -1,42 +1,36 @@
 buildscript {
-    ext {
-		springBootVersion = '1.5.1.RELEASE'
-        springCloudVersion='1.2.5.RELEASE'
-
-	}
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        mavenCentral()
+    }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
     }
 }
-
-
-
+plugins {
+	id "java"
+	id "jacoco"
+	id "groovy"
+  }
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-	baseName = 'inventory-composite-service'
-	version = '0.0.1-SNAPSHOT'
+    baseName = 'config-server'
 }
-
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-	mavenCentral()
-	 maven {
-        url 'http://maven.springframework.org/release'
-    }
+    mavenCentral()
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
-    compile("org.springframework.cloud:spring-cloud-config-server:1.2.3.RELEASE")	         
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-config-server', version: '1.4.0.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.9.RELEASE'
+	compile group: 'org.springframework.security', name: 'spring-security-rsa', version: '1.0.5.RELEASE'
+	
 }
 
 eclipse {
